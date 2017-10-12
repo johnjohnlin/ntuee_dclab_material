@@ -19,9 +19,11 @@ For example if we want to design a module for outputing all even numbers less th
 a certain number, then we can design two modules:
 
 module A: given n, counting from 0 to n-1
+
 {5} -> {0, 1, 2, 3, 4}
 
 module B: given a number, output if it is even.
+
 {1, 4, 1, 5, 10, 0} -> {4, 10, 0}
 
 Then the desired module is obtained by connecting A and B.
@@ -30,17 +32,17 @@ We intdoruce two very common but simple protocol dataflow.
 The one wire protocol is quite simple: if "sender" set the val (valid signal)
 to high, then the "sender" has prepared a valid data at that cycle.
 
-   output val         ----> input val
-   output dat1        ----> input dat1
-   output [10:0] dat2 ----> input [10:0] dat2
+    output val         ----> input val
+    output dat1        ----> input dat1
+    output [10:0] dat2 ----> input [10:0] dat2
 
 Often the module cannot handle data at the moment, so another signal rdy (ready)
 is used to stop the data transfer, which can be called as the two wire protocol.
 
-   output val         ----> input  val
-   input  rdy         <---- output rdy
-   output dat1        ----> input  dat1
-   output [10:0] dat2 ----> input [10:0] dat2
+    output val         ----> input  val
+    input  rdy         <---- output rdy
+    output dat1        ----> input  dat1
+    output [10:0] dat2 ----> input [10:0] dat2
 
 val (valid signal) means that "sender" want to send the data, and the sender must hold the data you want to send.
 rdy (ready signal) means that "receiver" can accept the data.
@@ -57,14 +59,14 @@ That's all, your mission is to implement a module that accept {a, e, n} and
 output pow(a, e) mod n, conforming to the two wire protocol.
 We also prepared a testbench for you (see appendix).
 
-## Implement a Avalon master to control RS-232 and wrap your core
+## Implement a Avalon Master to Control RS-232 and Wrap Your Core
 
 The RS-232 module mainly has 2 functionalities.
 
 1. Read a byte from computer
 2. Write a byte from computer
 
-Basically, your module will work like this.
+Basically, your module (Avalon master) will work like this.
 
 1. Receive 32 bytes from computer (n)
 2. Receive 32 bytes from computer (e)
@@ -108,23 +110,18 @@ Please follow the powerpoint.
 ## nLint
 Verilog coding style checking
 
-    cd lab1/lint/
+    cd lab2/lint/
     make Top
 
 ## Simulation
 Simulate the core file(s)
 
-    cd lab1/sim/
-    make -f ../../Makefile Top
-
-Simulate the core file(s)
-
-    cd sim/
+    cd lab2/sim/
     make -f ../../Makefile LAB2_core
 
 Simulate the wrapper file(s)
 
-    cd sim/
+    cd lab2/sim/
     make -f ../../Makefile LAB2_wrap
 
 Note that I only dump partial signals during the simulation of wrapper.
