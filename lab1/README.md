@@ -1,10 +1,10 @@
 # Guideline
-# Synthesizable Verilog
+## Synthesizable Verilog
 In Verilog, only a subset of syntax can be compiled to hardware,
 and we call them the *synthesizable* code.
 Here is some guidelines about the recommended synthesizable code.
 
-### Register and the Sequential Block
+## Register and the Sequential Block
 The ONLY way you should use to generate registers is:
 
     always_ff (posedge clk or negedge rst) if (!rst)
@@ -28,7 +28,7 @@ In fact, it's a simple techique for power saving.
       b_r <= b_w;
     end
 
-### Register (Sequential Blocks) and Combinational Blocks
+## Register (Sequential Blocks) and Combinational Blocks
 If you follow the X\_r and X\_w naming conventions,
 always keep in mind that X\_r is a register.
 And NEVER use X\_r in the left hand side of combinational blocks.
@@ -51,7 +51,7 @@ And be careful when X\_w appears in right hand side of combinational blocks.
       a_w <= ...; // definitely wrong
     end
 
-### A Working Example
+## A Working Example
 Add this lines in Top.sv, compile (Ctrl+L) and program it to DE2-115.
 Guess and observe what will happen?
 
@@ -69,8 +69,8 @@ Guess and observe what will happen?
       o_random_out <= random_out_w;
     end
 
-## FAQ
-### My Verilog Pass the Simulation, but It Doesn't Work.
+# FAQ
+## My Verilog Pass the Simulation, but It Doesn't Work.
 Again, in Verilog, only a subset of syntax can be compiled to hardware.
 If you see any WARNING about *Combinational Loop* or *Infered Latch*,
 then you should modify your source code.
@@ -90,7 +90,7 @@ please double check your code.
 * 23007 (Verilog) Case Statement Not Fully Specified
 * 25001 Signal with No Driver
 
-### Compile Fails at Fitter/Generate Program File Stage
+## Compile Fails at Fitter/Generate Program File Stage
 If synthesis passes but you encounter a weird error,
 please follow these steps:
 
