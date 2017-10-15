@@ -2,7 +2,7 @@
 
 The roadmap of this lab:
 
-1. Create Project (same as lab1)
+1. Create project (same as lab1)
 2. Implement the RSA256 core
 3. Implement a Avalon master to control RS-232 and wrap your core
 4. Build Qsys system
@@ -95,6 +95,19 @@ We also prepared a testbench for you (see appendix).
 
 ## Build Qsys system
 Please follow the powerpoint.
+
+# Requirements
+The requirements are:
+
+* Connect your PC and FPGA with RS-232 cable.
+* Run the Connect your PC and FPGA with RS-232 cable,
+  execute pc\_sw/rs232.py to decrypt enc.bin with key.bin (There will be hidden data).
+* You have to install Python and serial library. Try to install that by yourself.
+
+## Bonus
+
+* Can you compute longer RSA?
+* Design a better protocol so you don't have to reset every time.
 
 # Appendix
 ## File Structure
