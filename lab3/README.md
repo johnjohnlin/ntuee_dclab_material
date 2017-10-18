@@ -10,9 +10,9 @@ You have to use I2C to initialize the WM8731 chip,
 and we have provided recommended booting sequence for you.
 Since we cannot build circuit with a fixed-perioded clock with SystemVerilog,
 we need a reference clock to build the SCLK/SDAT of I2C.
-According the slide, 78 cycles is required to build a valid 16-bit I2C in our implementation (Why?).
-If you have the booting sequence is 10x16-bit,
-then you can complete the initialization within 780 cycles.
+According the slide, 114 cycles is required to build a valid 24-bit I2C in our implementation (Why?).
+If you have the booting sequence is 10x(8-bit address/RW + 16-bit data),
+then you can complete the initialization within 1140 cycles.
 
 The reference clock (again, not SCLK) should be 100kHz or less,
 and you should use PLL to make a slower clock from a 50MHz (default clock) or
@@ -25,17 +25,20 @@ Ideally, you have to enable this part only after the I2C initialization.
 However, in a real world, passing between different clock domains is not trivial.
 So we just assume that the initialization is done right after the reset.
 
-This design uses the 12MHz BCLK instead of the 50MHz default clock since it would be simpler.
+You should use the 12MHz BCLK instead of the 50MHz default clock since it would be simpler.
 Both ADCCLK and DACCLK are inverted every hundreds of cycle,
 and you can read/write the ADCDAT/DACDAT to record/play sound.
 You should read the specification for more details.
+
+Should we take care of XCLK in this lab?
+Try to figure it out from the *power down modes* register of WM8731.
 
 # Requirements
 The lab is very free. The only requirements are:
 
 * Implement a audio recorder/player with 16-bit resolution with FPGA,
   which should be able to record for 30 seconds.
-* You have to support 2x~8x faster and 2~8x slower play mode as well.
+* You have to support 2x\~8x faster and 2\~8x slower play mode as well.
 * For slow play mode, you have to support piecewise-constant and linear interpolation
   (You should have learned that in Signal and System). You have to demo that
   with an oscilloscope (You can use a 3.5mm double male cable).

@@ -138,7 +138,7 @@ module DE2_115(
 );
 	// inout port at this layer
 	logic i2c_oen, i2c_sdat;
-	logic [15:0] sram_d, sram_q;
+	logic [15:0] sram_wdata;
 	assign I2C_SDAT = i2c_oen ? i2c_sdat : 1'bz;
 	assign SRAM_DQ = /* TODO */;
 	/* TODO: Add PLL to generate a 100kHz clock (Google is your friend) */
@@ -147,7 +147,7 @@ module DE2_115(
 		.i_rst(KEY[0]),
 		.o_sclk(I2C_SCLK),
 		.o_sdat(i2c_sdat),
-		// you are outputing (you are not outputing only when you are not "ack"ing.)
+		// you are outputing (you are not outputing only when you are "ack"ing.)
 		.o_oen(i2c_oen)
 	);
 	// And add your module here, it roughly looks like this
