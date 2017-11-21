@@ -24,10 +24,12 @@ def To2d(name, pad):
 		return np.fliplr(ret)
 
 def main():
-	yield rst_out_ev
 	master = TwoWire.Master(src_val, src_rdy, src_bus, ck_ev)
 	i_data = master.values
 	slave = TwoWire.Slave(dst_val, dst_rdy, dst_bus, ck_ev, callbacks=[st.Get])
+	yield rst_out_ev
+	for i in range(5):
+		yield ck_ev
 	val_n = np.array([
 		0x029CF831, 0x940D774C,
 		0xCDEE4035, 0xE85388EC,

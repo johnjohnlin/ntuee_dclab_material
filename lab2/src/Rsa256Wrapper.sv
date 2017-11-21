@@ -41,7 +41,7 @@ module Rsa256Wrapper(
 	output logic        avm_read,
 	output logic        avm_write,
 	input               avm_waitrequest,
-	output logic        avm_readdatavalid,
+	input               avm_readdatavalid,
 	input        [31:0] avm_readdata,
 	output logic [31:0] avm_writedata
 );
